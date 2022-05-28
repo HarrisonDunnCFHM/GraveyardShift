@@ -12,6 +12,7 @@ public class DirtManager : MonoBehaviour
     [SerializeField] ParticleSystem myParticles;
     [SerializeField] TextMeshProUGUI dirtCounter;
     [SerializeField] TextMeshProUGUI boneCounter;
+    [SerializeField] List<AudioClip> dirtSounds;
 
 
     //cached references
@@ -52,7 +53,8 @@ public class DirtManager : MonoBehaviour
         }
         yield return new WaitForSeconds(disappearDelay);
         cluster[index].GetComponent<SpriteRenderer>().enabled = false;
-        if(cluster[index].myType == GamePiece.PieceType.Bone) { boneCount++; }
+        PlayDirtSound();
+        if (cluster[index].myType == GamePiece.PieceType.Bone) { boneCount++; }
         if (cluster[index].myType == GamePiece.PieceType.Dirt) { dirtCount++; }
         yield return new WaitForSeconds(((cluster.Length + 2) * timeBetweenParticleBursts) - particleTimer + disappearDelay);
         if (cluster[index] != null)
@@ -60,5 +62,10 @@ public class DirtManager : MonoBehaviour
             Destroy(cluster[index].gameObject);
         }
         GamePiece.destroying = false;
+    }
+    private void PlayDirtSound()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, dirtSounds.Count);
+        AudioSource.PlayClipAtPoint(dirtSounds[randomIndex], Camera.main.transform.position, 0.4f);
     }
 }

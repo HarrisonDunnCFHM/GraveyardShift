@@ -38,7 +38,7 @@ public class PieceSpawner : MonoBehaviour
     private IEnumerator CreateGamePiece(SpawnColumn column)
     {
         column.canSpawn = false;
-        if (column.transform.childCount < 10)
+        if (column.transform.childCount < column.columnCapacity)
         {
             GamePiece newPiece = Instantiate(GetRandomPiece(), column.gameObject.transform.position, Quaternion.identity);
             newPiece.transform.parent = column.gameObject.transform;

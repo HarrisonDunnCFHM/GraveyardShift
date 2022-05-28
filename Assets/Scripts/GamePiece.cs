@@ -29,6 +29,7 @@ public class GamePiece : MonoBehaviour
     public List<GamePiece> myCluster = new List<GamePiece>();
     public static bool destroying = false;
     int lastFrameClusterCount = 0;
+    public int myColumnBottom;
 
     DirtManager dirtManager;
     SpriteRenderer myRenderer;
@@ -45,6 +46,8 @@ public class GamePiece : MonoBehaviour
         myParticles = GetComponentInChildren<ParticleSystem>();
         dirtManager = FindObjectOfType<DirtManager>();
         movePicker = FindObjectOfType<MovePicker>();
+        // myColumn = GetComponentInParent<Transform>().gameObject;
+        myColumnBottom = myColumn.GetComponent<SpawnColumn>().columnBottom;
     }
 
     
@@ -52,6 +55,7 @@ public class GamePiece : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        IfHovered();
         DropPiece();
         AssembleMyCluster();
         if (movePicker.clusterDebugger) 
@@ -69,6 +73,22 @@ public class GamePiece : MonoBehaviour
         FallOffBottom();
     }
 
+    private void IfHovered()
+    {
+        Vector2Int mousePos = Vector2Int.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        Vector2Int myPos = Vector2Int.RoundToInt(transform.position);
+        if(mousePos == myPos)
+        {
+            if (myType != PieceType.Bone && myType != PieceType.Dirt)
+            {
+                transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+            }
+        }
+        else if(!isDestroying)
+        {
+            transform.localScale = Vector3.one;
+        }
+    }
 
     private void AssembleMyCluster()
     {
@@ -148,7 +168,6 @@ public class GamePiece : MonoBehaviour
         {
             myRenderer.sprite = dirtBlock;
             myRenderer.color = Color.white;
-            transform.localScale = Vector3.one;
             myHighlighter.gameObject.SetActive(false);
             if(myCluster.Count > 0 && !isDestroying)
             {
@@ -167,7 +186,6 @@ public class GamePiece : MonoBehaviour
         {
             myRenderer.sprite = boneSprite;
             myRenderer.color = Color.white;
-            transform.localScale = Vector3.one;
             myHighlighter.gameObject.SetActive(false); 
             if (myCluster.Count > 0)
             {
@@ -203,7 +221,7 @@ public class GamePiece : MonoBehaviour
                 return;
             }
         }
-        if(belowMe.y <= -12)
+        if(belowMe.y < myColumnBottom)
         {
             return;
         }
@@ -245,9 +263,17 @@ public class GamePiece : MonoBehaviour
 
     private void FallOffBottom()
     {
+        if(transform.localPosition.y == myColumnBottom && myType == PieceType.Dirt)
+        {
+            foreach(GamePiece piece in myCluster)
+            {
+                piece.isDestroying = true;
+                piece.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            }
+        }
         if(lastFrameClusterCount != myCluster.Count) { lastFrameClusterCount = myCluster.Count; return; }
         if (destroying) { return; }
-        if (transform.localPosition.y == -11)
+        if (transform.localPosition.y == myColumnBottom)
         {
             if (myType == PieceType.Dirt || myType == PieceType.Bone)
             {
@@ -257,6 +283,7 @@ public class GamePiece : MonoBehaviour
         }
     }
 
+    
 
     private void OnDestroy()
     {
