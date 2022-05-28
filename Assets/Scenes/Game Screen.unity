@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &411223611
 RectTransform:
   m_ObjectHideFlags: 0
@@ -705,7 +705,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Bones: 999'
+  m_text: 'Bones:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3f9cff8e4d7985d41bf9ff0358178176, type: 2}
   m_sharedMaterial: {fileID: -158781009699977015, guid: 3f9cff8e4d7985d41bf9ff0358178176, type: 2}
@@ -1106,6 +1106,10 @@ PrefabInstance:
       propertyPath: dirtCounter
       value: 
       objectReference: {fileID: 411223612}
+    - target: {fileID: 3667741705755096423, guid: f7029f4f260796e45ac8145e3cd94ae8, type: 3}
+      propertyPath: boneCountText
+      value: 'Bones:'
+      objectReference: {fileID: 0}
     - target: {fileID: 3667741705755096423, guid: f7029f4f260796e45ac8145e3cd94ae8, type: 3}
       propertyPath: dirtSounds.Array.size
       value: 5

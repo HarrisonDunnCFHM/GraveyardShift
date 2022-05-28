@@ -13,13 +13,14 @@ public class DirtManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dirtCounter;
     [SerializeField] TextMeshProUGUI boneCounter;
     [SerializeField] List<AudioClip> dirtSounds;
+    [SerializeField] String boneCountText;
 
 
     //cached references
     List<GamePiece> allPieces = new List<GamePiece>();
     public List<GamePiece> bottomPieces = new List<GamePiece>();
     int dirtCount;
-    int boneCount;
+    public int boneCount;
     
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class DirtManager : MonoBehaviour
     void Update()
     {
         dirtCounter.text = "Dirt: " + dirtCount.ToString();
-        boneCounter.text = "Bones: " + boneCount.ToString();
+        boneCounter.text = boneCountText + " " + boneCount.ToString();
     }
 
     public void RunPieceDestruction(GamePiece[] cluster)

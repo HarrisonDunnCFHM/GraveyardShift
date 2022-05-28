@@ -17,6 +17,7 @@ public class GamePiece : MonoBehaviour
     [SerializeField] public PieceType myType;
     [SerializeField] TextMeshProUGUI myClusterCounter;
     [SerializeField] float timeBetweenParticleBursts = 0.1f;
+    [SerializeField] float waitAtBottomCountdown = 0.2f;
 
 
 
@@ -33,7 +34,6 @@ public class GamePiece : MonoBehaviour
 
     DirtManager dirtManager;
     SpriteRenderer myRenderer;
-    ParticleSystem myParticles;
     MovePicker movePicker;
     
     // Start is called before the first frame update
@@ -43,7 +43,6 @@ public class GamePiece : MonoBehaviour
         nextFallTarget = new Vector2Int(0, -2);
         myRenderer = GetComponent<SpriteRenderer>();
         myHighlighter.gameObject.SetActive(false);
-        myParticles = GetComponentInChildren<ParticleSystem>();
         dirtManager = FindObjectOfType<DirtManager>();
         movePicker = FindObjectOfType<MovePicker>();
         // myColumn = GetComponentInParent<Transform>().gameObject;
@@ -56,21 +55,26 @@ public class GamePiece : MonoBehaviour
     void Update()
     {
         IfHovered();
-        DropPiece();
+        DisplayHighlight();
+        DisplayTypeChange();
         AssembleMyCluster();
-        if (movePicker.clusterDebugger) 
+        DropPiece();
+        FallOffBottom();
+        CheckIfBones();
+        DebugClusterCounter();
+    }
+
+    private void DebugClusterCounter()
+    {
+        if (movePicker.clusterDebugger)
         {
             myClusterCounter.enabled = true;
-            myClusterCounter.text = myCluster.Count.ToString(); 
-        } 
-        else 
-        { 
-            myClusterCounter.enabled = false; 
+            myClusterCounter.text = myCluster.Count.ToString();
         }
-        DisplayTypeChange();
-        DisplayHighlight();
-        CheckIfBones();
-        FallOffBottom();
+        else
+        {
+            myClusterCounter.enabled = false;
+        }
     }
 
     private void IfHovered()
@@ -92,9 +96,7 @@ public class GamePiece : MonoBehaviour
 
     private void AssembleMyCluster()
     {
-        if (isDropping 
-            /*|| myType == PieceType.Bone 
-            || myType == PieceType.Dirt*/) { return; }
+        //if (isDropping) { return; }
         List<GamePiece> allPieces = new List<GamePiece>(FindObjectsOfType<GamePiece>());
         //check adjacent pieces, if they're the same color, add to cluster
         
