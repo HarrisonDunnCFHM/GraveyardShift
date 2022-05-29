@@ -17,10 +17,13 @@ public class LevelManager : MonoBehaviour
     bool levelWon = false;
     bool levelLost = false;
     public bool outOfMoves = false;
+    AudioManager audioManager;
     
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
+        audioManager.ResetSliders();
         dirtManager = FindObjectOfType<DirtManager>();
         if (levelCompleteBox != null)
         {
@@ -72,6 +75,11 @@ public class LevelManager : MonoBehaviour
     }
 
     public void LoadCredits()
+    {
+        SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 2);
+    }
+
+    public void LoadHowTo()
     {
         SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
     }

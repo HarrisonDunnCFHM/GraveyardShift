@@ -141,3 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a51e554bea5fbe4198ff1b14c77ab71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: 1
+  masterVol: {fileID: 0}
+  musicMultiplier: 0.25

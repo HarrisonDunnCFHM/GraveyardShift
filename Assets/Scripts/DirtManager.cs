@@ -23,11 +23,13 @@ public class DirtManager : MonoBehaviour
     public int boneCount;
     bool destroying = false;
     LevelManager levelManager;
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
         levelManager = FindObjectOfType<LevelManager>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -73,6 +75,7 @@ public class DirtManager : MonoBehaviour
     private void PlayDirtSound()
     {
         int randomIndex = UnityEngine.Random.Range(0, dirtSounds.Count);
-        AudioSource.PlayClipAtPoint(dirtSounds[randomIndex], Camera.main.transform.position, 0.4f);
+        float volume = audioManager.masterVolume;
+        AudioSource.PlayClipAtPoint(dirtSounds[randomIndex], Camera.main.transform.position, volume * 1.1f);
     }
 }
