@@ -311,7 +311,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 059711f3ac442c24eb0f04b1b3c48de7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -342,13 +342,15 @@ MonoBehaviour:
   myType: 3
   myClusterCounter: {fileID: 6787275804034114830}
   timeBetweenParticleBursts: 0.1
-  dirtSounds: []
+  waitAtBottomCountdown: 0.2
   nextFallTarget: {x: 0, y: 0}
   myColumn: {fileID: 0}
   isSelected: 0
   isDropping: 0
   isDestroying: 0
   myCluster: []
+  myDiagonalCluster: []
+  myColumnBottom: 0
 --- !u!1 &5094032244867268687
 GameObject:
   m_ObjectHideFlags: 0
