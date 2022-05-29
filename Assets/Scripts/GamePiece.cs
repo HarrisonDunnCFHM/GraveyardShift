@@ -33,6 +33,7 @@ public class GamePiece : MonoBehaviour
     public static bool destroying = false;
     int lastFrameClusterCount = 0;
     public int myColumnBottom;
+    float waitAtBottomTimer = 0f;
 
     DirtManager dirtManager;
     SpriteRenderer myRenderer;
@@ -305,8 +306,24 @@ public class GamePiece : MonoBehaviour
                 piece.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             }
         }
+        if(atBottom == false)
+        {
+            atBottom = true;
+            myCluster = new List<GamePiece>();
+            myCluster.Add(this);
+            lastFrameClusterCount = 0;
+        }
         if(lastFrameClusterCount != myCluster.Count) { lastFrameClusterCount = myCluster.Count; return; }
         if (destroying) { return; }
+        if(waitAtBottomTimer < waitAtBottomCountdown)
+        {
+            waitAtBottomTimer += Time.deltaTime;
+            return;
+        }
+        else
+        {
+            waitAtBottomTimer = 0f;
+        }
         if (transform.localPosition.y == myColumnBottom)
         {
             if (myType == PieceType.Dirt || myType == PieceType.Bone)
