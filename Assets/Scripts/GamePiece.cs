@@ -287,7 +287,7 @@ public class GamePiece : MonoBehaviour
         bool isBone = true;
         foreach (GamePiece adjacentPiece in myClustersAdjacents)
         {
-            if (adjacentPiece.myType != PieceType.Dirt)
+            if (adjacentPiece.myType != PieceType.Dirt && adjacentPiece.myType != PieceType.Bone)
             {
                 isBone = false;
             }
