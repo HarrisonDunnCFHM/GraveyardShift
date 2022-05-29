@@ -7,7 +7,7 @@ using TMPro;
 
 public class GamePiece : MonoBehaviour
 {
-    public enum PieceType { Coffin, Lantern, Grave, Shovel, Dirt, Bone};
+    public enum PieceType { Coffin, Lantern, Grave, Shovel, Dirt, Bone, Flower, Candle};
     
     //config params
     [SerializeField] float dropSpeed = 10f;

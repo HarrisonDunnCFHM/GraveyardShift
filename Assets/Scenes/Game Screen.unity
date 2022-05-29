@@ -1486,6 +1486,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 753331445509228361, guid: f966b851992b4104bb4184179b37746b, type: 3}
+      propertyPath: spawnablePieces.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 753331445509228361, guid: f966b851992b4104bb4184179b37746b, type: 3}
+      propertyPath: spawnablePieces.Array.data[4]
+      value: 
+      objectReference: {fileID: 3283731831431772360, guid: da59654baa28fb246ae0df01703367bf, type: 3}
+    - target: {fileID: 753331445509228361, guid: f966b851992b4104bb4184179b37746b, type: 3}
+      propertyPath: spawnablePieces.Array.data[5]
+      value: 
+      objectReference: {fileID: 3602109124983853751, guid: 41d4b07768b26d4498ee6995da855b9d, type: 3}
     - target: {fileID: 753331445509228362, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: m_Name
       value: Match 3 Grid
@@ -1839,5 +1851,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7753974505409568847, guid: e636d9b865be5c24999633f69a2d79fd, type: 3}
+      propertyPath: pickablePieces.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753974505409568847, guid: e636d9b865be5c24999633f69a2d79fd, type: 3}
+      propertyPath: pickablePieces.Array.data[0]
+      value: 
+      objectReference: {fileID: 3283731831431772360, guid: da59654baa28fb246ae0df01703367bf, type: 3}
+    - target: {fileID: 7753974505409568847, guid: e636d9b865be5c24999633f69a2d79fd, type: 3}
+      propertyPath: pickablePieces.Array.data[1]
+      value: 
+      objectReference: {fileID: 5918460226564421991, guid: 9c0e40c486c2e664b87d3e43bddb8366, type: 3}
+    - target: {fileID: 7753974505409568847, guid: e636d9b865be5c24999633f69a2d79fd, type: 3}
+      propertyPath: pickablePieces.Array.data[2]
+      value: 
+      objectReference: {fileID: 3602109124983853751, guid: 41d4b07768b26d4498ee6995da855b9d, type: 3}
+    - target: {fileID: 7753974505409568847, guid: e636d9b865be5c24999633f69a2d79fd, type: 3}
+      propertyPath: pickablePieces.Array.data[3]
+      value: 
+      objectReference: {fileID: 9128641773914828772, guid: bfbf3785faffd6b488e4b1480994d888, type: 3}
+    - target: {fileID: 7753974505409568847, guid: e636d9b865be5c24999633f69a2d79fd, type: 3}
+      propertyPath: pickablePieces.Array.data[4]
+      value: 
+      objectReference: {fileID: 2931331645801245939, guid: f2e06f4b9c9c91e49b384b809a60c838, type: 3}
+    - target: {fileID: 7753974505409568847, guid: e636d9b865be5c24999633f69a2d79fd, type: 3}
+      propertyPath: pickablePieces.Array.data[5]
+      value: 
+      objectReference: {fileID: 3397061818433509328, guid: 4aa7b325f2629ba45a3a2da5d34b53c0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e636d9b865be5c24999633f69a2d79fd, type: 3}
