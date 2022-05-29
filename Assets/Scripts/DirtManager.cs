@@ -21,22 +21,26 @@ public class DirtManager : MonoBehaviour
     public List<GamePiece> bottomPieces = new List<GamePiece>();
     int dirtCount;
     public int boneCount;
-    
+    bool destroying = false;
+    LevelManager levelManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         dirtCounter.text = "Dirt: " + dirtCount.ToString();
-        boneCounter.text = boneCountText + " " + boneCount.ToString();
+        boneCounter.text = boneCountText + " " + boneCount.ToString() + " of " + levelManager.requiredBonesToWin.ToString();
     }
 
     public void RunPieceDestruction(GamePiece[] cluster)
     {
+        if (destroying) { return; }
+        destroying = true;
         for (int i = 0; i < cluster.Length; ++i)
         {
             StartCoroutine(DestroyPiece(cluster, i));
@@ -46,23 +50,25 @@ public class DirtManager : MonoBehaviour
     private IEnumerator DestroyPiece(GamePiece[] cluster, int index)
     {
         float particleTimer = index * timeBetweenParticleBursts;
-        yield return new WaitForSeconds(particleTimer);
         if (cluster[index] != null)
         {
-            GameObject particleBurst = Instantiate(myParticles.gameObject, cluster[index].gameObject.transform.position, Quaternion.identity);
-            particleBurst.GetComponent<ParticleSystem>().Play();
+            yield return new WaitForSeconds(particleTimer);
+                myParticles.gameObject.transform.position = cluster[index].gameObject.transform.position;
+                myParticles.Play();
+
+                //GameObject particleBurst = Instantiate(myParticles.gameObject, cluster[index].gameObject.transform.position, Quaternion.identity);
+                //particleBurst.GetComponent<ParticleSystem>().Play();
+            yield return new WaitForSeconds(disappearDelay);
+            cluster[index].GetComponent<SpriteRenderer>().enabled = false;
+            PlayDirtSound();
+            yield return new WaitForSeconds(((cluster.Length + 2) * timeBetweenParticleBursts) - particleTimer + disappearDelay);
+            if (cluster[index] != null)
+            {
+                Destroy(cluster[index].gameObject);
+            }
+            GamePiece.destroying = false;
+            destroying = false;
         }
-        yield return new WaitForSeconds(disappearDelay);
-        cluster[index].GetComponent<SpriteRenderer>().enabled = false;
-        PlayDirtSound();
-        if (cluster[index].myType == GamePiece.PieceType.Bone) { boneCount++; }
-        if (cluster[index].myType == GamePiece.PieceType.Dirt) { dirtCount++; }
-        yield return new WaitForSeconds(((cluster.Length + 2) * timeBetweenParticleBursts) - particleTimer + disappearDelay);
-        if (cluster[index] != null)
-        {
-            Destroy(cluster[index].gameObject);
-        }
-        GamePiece.destroying = false;
     }
     private void PlayDirtSound()
     {

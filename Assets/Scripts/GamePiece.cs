@@ -28,6 +28,7 @@ public class GamePiece : MonoBehaviour
     public bool isDropping;
     public bool isDestroying = false;
     public List<GamePiece> myCluster = new List<GamePiece>();
+    public List<GamePiece> myDiagonalCluster = new List<GamePiece>();
     public static bool destroying = false;
     int lastFrameClusterCount = 0;
     public int myColumnBottom;
@@ -49,7 +50,7 @@ public class GamePiece : MonoBehaviour
         myColumnBottom = myColumn.GetComponent<SpawnColumn>().columnBottom;
     }
 
-    
+
 
     // Update is called once per frame
     void Update()
@@ -58,6 +59,7 @@ public class GamePiece : MonoBehaviour
         DisplayHighlight();
         DisplayTypeChange();
         AssembleMyCluster();
+        //AssembleDiagonalCluster();
         DropPiece();
         FallOffBottom();
         CheckIfBones();
@@ -96,7 +98,6 @@ public class GamePiece : MonoBehaviour
 
     private void AssembleMyCluster()
     {
-        //if (isDropping) { return; }
         List<GamePiece> allPieces = new List<GamePiece>(FindObjectsOfType<GamePiece>());
         //check adjacent pieces, if they're the same color, add to cluster
         
@@ -152,6 +153,31 @@ public class GamePiece : MonoBehaviour
 
     }
 
+    private void AssembleDiagonalCluster()
+    {
+        List<GamePiece> allPieces = new List<GamePiece>(FindObjectsOfType<GamePiece>());
+        //check diagonal pieces, if they're the same color, add to cluster
+        foreach(GamePiece piece in myCluster)
+        {
+            Vector2Int upperRightPos = Vector2Int.RoundToInt(piece.transform.position + Vector3.right + Vector3.up);
+            Vector2Int lowerRightPos = Vector2Int.RoundToInt(piece.transform.position + Vector3.right + Vector3.down);
+            Vector2Int upperLeftPos = Vector2Int.RoundToInt(piece.transform.position + Vector3.left + Vector3.up);
+            Vector2Int lowerLeftPos = Vector2Int.RoundToInt(piece.transform.position + Vector3.left + Vector3.down);
+            foreach(GamePiece otherPiece in allPieces)
+            {
+                Vector2Int otherPos = Vector2Int.RoundToInt(otherPiece.transform.position);
+                if (otherPos == upperRightPos || otherPos == lowerRightPos || otherPos == upperLeftPos || otherPos == lowerLeftPos)
+                {
+                    if(!myDiagonalCluster.Contains(otherPiece))
+                    {
+                        myDiagonalCluster.Add(otherPiece);
+                    }
+                }
+            }
+        }
+
+    }
+
     private void DisplayHighlight()
     {
         if(isSelected)
@@ -179,6 +205,8 @@ public class GamePiece : MonoBehaviour
                     {
                         piece.myCluster = new List<GamePiece>();
                         piece.myCluster.Add(piece);
+                        piece.myDiagonalCluster = new List<GamePiece>();
+                        piece.myDiagonalCluster.Add(piece); 
                         break;
                     }
                 }
@@ -197,6 +225,8 @@ public class GamePiece : MonoBehaviour
                     {
                         piece.myCluster = new List<GamePiece>();
                         piece.myCluster.Add(piece);
+                        piece.myDiagonalCluster = new List<GamePiece>();
+                        piece.myDiagonalCluster.Add(piece); 
                         break;
                     }
                 }
@@ -265,6 +295,7 @@ public class GamePiece : MonoBehaviour
 
     private void FallOffBottom()
     {
+        if (isDropping) { return; }
         if(transform.localPosition.y == myColumnBottom && myType == PieceType.Dirt)
         {
             foreach(GamePiece piece in myCluster)
@@ -289,6 +320,7 @@ public class GamePiece : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (myType == PieceType.Bone) { dirtManager.boneCount++; }
         List<GamePiece> allPieces = new List<GamePiece>(FindObjectsOfType<GamePiece>());
         foreach(GamePiece piece in myCluster.ToArray())
         {
@@ -298,6 +330,8 @@ public class GamePiece : MonoBehaviour
         {
             piece.myCluster = new List<GamePiece>();
             piece.myCluster.Add(piece);
+            piece.myDiagonalCluster = new List<GamePiece>();
+            piece.myDiagonalCluster.Add(piece);
         }
     }
 }

@@ -17,22 +17,58 @@ public class MovePicker : MonoBehaviour
     public List<GamePiece> selectedPieces = new List<GamePiece>();
     GamePiece lastPickedPiece;
     LineRenderer lineRenderer;
+    PieceSpawner pieceSpawner;
     List<Transform> linePoints = new List<Transform>();
     public bool clusterDebugger;
+    LevelManager levelManager;
+    bool validMoves = true;
     
     // Start is called before the first frame update
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        levelManager = FindObjectOfType<LevelManager>();
+        pieceSpawner = FindObjectOfType<PieceSpawner>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //CheckForValidMoves();
         ResetDebug();
         PickPieces();
         ProcessMove();
         DrawMoveLine();
+    }
+
+    private void CheckForValidMoves()
+    {
+        List<GamePiece> allPieces = new List<GamePiece>(FindObjectsOfType<GamePiece>());
+        List<GamePiece> bottomPieces = new List<GamePiece>();
+        foreach(GamePiece piece in allPieces)
+        {
+            if(piece.gameObject.transform.localPosition.y == piece.myColumnBottom)
+            {
+                bottomPieces.Add(piece);
+            }
+        }
+        if(bottomPieces.Count != pieceSpawner.spawnableLocations.Count) { return; }
+        validMoves = false;
+        foreach(GamePiece piece in bottomPieces)
+        {
+            if(piece.myCluster.Count < minPiecesToClear 
+                && !piece.isDropping 
+                && piece.myType != GamePiece.PieceType.Bone 
+                && piece.myType != GamePiece.PieceType.Dirt)
+            {
+                if(piece.myDiagonalCluster.Count >= minPiecesToClear)
+                {
+                    validMoves = true;
+                }
+            }
+            //else { validMoves = true; }
+        }
+        if (!validMoves) { levelManager.outOfMoves = true; }
     }
 
     private void ResetDebug()

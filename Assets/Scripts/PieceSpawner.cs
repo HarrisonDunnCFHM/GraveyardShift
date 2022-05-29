@@ -6,8 +6,8 @@ using UnityEngine;
 public class PieceSpawner : MonoBehaviour
 {
     //config parameters
-    [SerializeField] List<GamePiece> spawnablePieces;
-    [SerializeField] List<SpawnColumn> spawnableLocations;
+    [SerializeField] List<GamePiece> spawnablePieces; 
+    [SerializeField] public List<SpawnColumn> spawnableLocations;
     [SerializeField] float spawnPieceCooldown = 0.1f;
 
     //cached refs
