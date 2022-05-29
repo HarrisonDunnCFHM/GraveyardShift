@@ -162,8 +162,15 @@ public class MovePicker : MonoBehaviour
     }
     private void ProcessMove()
     {
+        
         if(Input.GetMouseButtonUp(0))
         {
+            List<GamePiece> allPieces = new List<GamePiece>(FindObjectsOfType<GamePiece>());
+            foreach(GamePiece piece in allPieces)
+            {
+                piece.myCluster = new List<GamePiece>();
+                piece.myCluster.Add(piece);
+            }
             if (selectedPieces.Count >= minPiecesToClear)
             {
                 foreach (GamePiece piece in selectedPieces)

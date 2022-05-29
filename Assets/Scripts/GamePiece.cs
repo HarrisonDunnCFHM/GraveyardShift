@@ -27,6 +27,7 @@ public class GamePiece : MonoBehaviour
     public bool isSelected;
     public bool isDropping;
     public bool isDestroying = false;
+    public bool atBottom = false;
     public List<GamePiece> myCluster = new List<GamePiece>();
     public List<GamePiece> myDiagonalCluster = new List<GamePiece>();
     public static bool destroying = false;
@@ -61,8 +62,8 @@ public class GamePiece : MonoBehaviour
         AssembleMyCluster();
         //AssembleDiagonalCluster();
         DropPiece();
-        FallOffBottom();
         CheckIfBones();
+        FallOffBottom();
         DebugClusterCounter();
     }
 
@@ -330,8 +331,7 @@ public class GamePiece : MonoBehaviour
         {
             piece.myCluster = new List<GamePiece>();
             piece.myCluster.Add(piece);
-            piece.myDiagonalCluster = new List<GamePiece>();
-            piece.myDiagonalCluster.Add(piece);
+            piece.isDestroying = false;
         }
     }
 }

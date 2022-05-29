@@ -1380,15 +1380,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 753331444531021474, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnCapacity
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 753331444845189399, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnBottom
-      value: -8
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 753331444845189399, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnCapacity
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 753331444935724203, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnBottom
@@ -1400,15 +1400,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 753331444935724203, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnCapacity
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 753331445332586031, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnBottom
-      value: -9
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 753331445332586031, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnCapacity
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 753331445398775414, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: m_IsActive
@@ -1416,11 +1416,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 753331445418971167, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnBottom
-      value: -8
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 753331445418971167, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnCapacity
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 753331445439252065, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnBottom
@@ -1432,15 +1432,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 753331445439252065, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnCapacity
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 753331445496422733, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnBottom
-      value: -10
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 753331445496422733, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnCapacity
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 753331445509228360, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: m_RootOrder
@@ -1488,7 +1488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 753331445509228361, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: spawnablePieces.Array.size
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 753331445509228361, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: spawnablePieces.Array.data[4]
@@ -1512,23 +1512,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 753331445950910574, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnCapacity
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 753331446013474414, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnBottom
-      value: -9
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 753331446013474414, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnCapacity
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 753331446142415932, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnBottom
-      value: -10
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 753331446142415932, guid: f966b851992b4104bb4184179b37746b, type: 3}
       propertyPath: columnCapacity
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f966b851992b4104bb4184179b37746b, type: 3}
