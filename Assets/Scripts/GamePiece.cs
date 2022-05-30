@@ -245,7 +245,13 @@ public class GamePiece : MonoBehaviour
         FindTarget();
         float step = dropSpeed * Time.deltaTime;
         transform.localPosition = Vector2.MoveTowards(transform.localPosition, nextFallTarget, step);
-        if (transform.localPosition == new Vector3(nextFallTarget.x, nextFallTarget.y, 0)) { isDropping = false; }
+        if (transform.localPosition == new Vector3(nextFallTarget.x, nextFallTarget.y, 0)) 
+        { isDropping = false; }
+        else
+        {
+            myCluster = new List<GamePiece>();
+            myCluster.Add(this);
+        }
     }
 
     private void FindTarget()
@@ -287,6 +293,7 @@ public class GamePiece : MonoBehaviour
                 }
             }
         }
+        if(myClustersAdjacents.Count <= 2) { return; }
         bool isBone = true;
         foreach (GamePiece adjacentPiece in myClustersAdjacents)
         {
