@@ -108,12 +108,15 @@ public class MovePicker : MonoBehaviour
 
     private void PickPieces()
     {
+        if(levelManager.levelLost)
+        { return; }
         List<GamePiece> allPieces = new List<GamePiece>(FindObjectsOfType<GamePiece>());
         pickablePieces = new List<GamePiece>();
         foreach (GamePiece piece in allPieces)
         {
             if (piece.myType != GamePiece.PieceType.Dirt
-                && piece.myType != GamePiece.PieceType.Bone)
+                && piece.myType != GamePiece.PieceType.Bone
+                && piece.myType != GamePiece.PieceType.Robber)
             {
                 pickablePieces.Add(piece);
             }

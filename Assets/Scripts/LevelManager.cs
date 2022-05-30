@@ -13,9 +13,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameObject levelLostBox;
 
     //cached references
-    DirtManager dirtManager;
+    SpecialPieceManager dirtManager;
     bool levelWon = false;
-    bool levelLost = false;
+    public bool levelLost = false;
     public bool outOfMoves = false;
     AudioManager audioManager;
     
@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
     {
         audioManager = FindObjectOfType<AudioManager>();
         audioManager.ResetSliders();
-        dirtManager = FindObjectOfType<DirtManager>();
+        dirtManager = FindObjectOfType<SpecialPieceManager>();
         if (levelCompleteBox != null)
         {
             levelCompleteBox.SetActive(false);
@@ -54,14 +54,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void CheckForLoss()
+    public void LevelLost()
     {
         if (dirtManager == null) { return; }
-        if (outOfMoves && !levelWon)
-        {
-            levelLost = true;
-            levelLostBox.SetActive(true);
-        }
+        levelLost = true;
+        levelLostBox.SetActive(true);
     }
 
     public void LoadNextLevel()

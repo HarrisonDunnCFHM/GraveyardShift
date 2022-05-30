@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class DirtManager : MonoBehaviour
+public class SpecialPieceManager : MonoBehaviour
 {
     //config paramters
     [SerializeField] float timeBetweenParticleBursts = 0.1f;
@@ -14,12 +14,14 @@ public class DirtManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI boneCounter;
     [SerializeField] List<AudioClip> dirtSounds;
     [SerializeField] String boneCountText;
+    [SerializeField] public int robberMax;
 
 
     //cached references
     List<GamePiece> allPieces = new List<GamePiece>();
     public List<GamePiece> bottomPieces = new List<GamePiece>();
     int dirtCount;
+    int robberCount;
     public int boneCount;
     bool destroying = false;
     LevelManager levelManager;

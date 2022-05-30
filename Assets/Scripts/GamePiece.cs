@@ -7,7 +7,7 @@ using TMPro;
 
 public class GamePiece : MonoBehaviour
 {
-    public enum PieceType { Coffin, Lantern, Grave, Shovel, Dirt, Bone, Flower, Candle};
+    public enum PieceType { Coffin, Lantern, Grave, Shovel, Dirt, Bone, Flower, Candle, Robber};
     
     //config params
     [SerializeField] float dropSpeed = 10f;
@@ -35,9 +35,10 @@ public class GamePiece : MonoBehaviour
     public int myColumnBottom;
     float waitAtBottomTimer = 0f;
 
-    DirtManager dirtManager;
+    SpecialPieceManager dirtManager;
     SpriteRenderer myRenderer;
     MovePicker movePicker;
+    LevelManager levelManager;
     
     // Start is called before the first frame update
     void Start()
@@ -46,10 +47,11 @@ public class GamePiece : MonoBehaviour
         nextFallTarget = new Vector2Int(0, -2);
         myRenderer = GetComponent<SpriteRenderer>();
         myHighlighter.gameObject.SetActive(false);
-        dirtManager = FindObjectOfType<DirtManager>();
+        dirtManager = FindObjectOfType<SpecialPieceManager>();
         movePicker = FindObjectOfType<MovePicker>();
         // myColumn = GetComponentInParent<Transform>().gameObject;
         myColumnBottom = myColumn.GetComponent<SpawnColumn>().columnBottom;
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
 
@@ -83,11 +85,12 @@ public class GamePiece : MonoBehaviour
 
     private void IfHovered()
     {
+        if (levelManager.levelLost) { return; }
         Vector2Int mousePos = Vector2Int.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         Vector2Int myPos = Vector2Int.RoundToInt(transform.position);
         if(mousePos == myPos)
         {
-            if (myType != PieceType.Bone && myType != PieceType.Dirt)
+            if (myType != PieceType.Bone && myType != PieceType.Dirt && myType != PieceType.Robber)
             {
                 transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
             }
@@ -298,7 +301,14 @@ public class GamePiece : MonoBehaviour
     private void FallOffBottom()
     {
         if (isDropping) { return; }
-        if(transform.localPosition.y == myColumnBottom && myType == PieceType.Dirt)
+        if (transform.localPosition.y == myColumnBottom && myType == PieceType.Robber)
+        {
+            levelManager.LevelLost();
+            transform.localScale = new Vector2(2, 2);
+            GetComponent<SpriteRenderer>().sortingOrder = 11;
+        }
+
+            if (transform.localPosition.y == myColumnBottom && myType == PieceType.Dirt)
         {
             foreach(GamePiece piece in myCluster)
             {
